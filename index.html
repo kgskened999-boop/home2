@@ -1,233 +1,253 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Do 0 aos 10K em 10 Dias</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08090d">
+<title>Do 0 aos 10K em Menos de 10 Dias</title>
 <style>
-*{box-sizing:border-box}
-:root{--red:#ff1238;--bg:#080808;--card:#171717}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:white;font-family:Arial,sans-serif}
-.hidden{display:none!important}
-button,a{cursor:pointer}
-a{text-decoration:none;color:inherit}
-#loading,#quiz{position:fixed;inset:0;z-index:10;background:radial-gradient(ellipse at top,#40000d,#080808 65%);display:flex;align-items:center;justify-content:center;padding:22px}
-.loader,.quizbox{width:min(550px,100%);text-align:center;padding:30px;background:#101010;border:1px solid #ff123855;border-radius:22px;box-shadow:0 0 60px #ff12381a;animation:appear .7s ease}
-.brand{font-size:clamp(30px,7vw,48px);font-weight:1000;letter-spacing:-2px}
-.brand span,h1 span{color:var(--red)}
-.loadtext{color:#bbb;margin:22px 0 14px}
-.track{height:12px;background:#292929;border-radius:30px;overflow:hidden}
-#bar{height:100%;width:0;background:linear-gradient(90deg,#a90020,#ff1238,#ff758b);box-shadow:0 0 20px var(--red)}
-#percent{font-size:25px;font-weight:bold;margin-top:12px;color:var(--red)}
-h1{font-size:clamp(36px,7vw,65px);line-height:1;letter-spacing:-2px}
-p{color:#bbb;line-height:1.7}
-.kicker{color:var(--red);font-weight:bold;letter-spacing:2px;font-size:12px;text-transform:uppercase}
-.answers{display:grid;gap:12px}
-.answer{padding:16px;background:#1c1c1c;border:1px solid #444;border-radius:12px;color:white;text-align:left;font-size:16px;transition:.25s}
-.answer:hover,.answer.selected{border-color:var(--red);background:#35000c;transform:translateX(4px)}
-.primary{display:inline-block;padding:16px 23px;border:0;border-radius:12px;background:var(--red);color:white;font-weight:900;box-shadow:0 0 25px #ff123833;transition:.25s}
-.primary:hover{transform:translateY(-4px);box-shadow:0 0 38px #ff123866}
-#next{width:100%;margin-top:20px}
-header{display:flex;justify-content:space-between;align-items:center;padding:20px 6%;border-bottom:1px solid #292929}
-header strong{font-size:19px}
-header strong span{color:var(--red)}
-header a{font-size:13px}
-.hero{text-align:center;padding:85px 6%;background:radial-gradient(ellipse at top,#42000e,transparent 65%);position:relative}
-.hero h1{font-size:clamp(43px,8vw,86px);margin:22px auto;animation:titleGlow 3s ease-in-out infinite alternate}
-.hero p{max-width:680px;margin:0 auto 28px;font-size:17px}
-.small{font-size:12px;margin-top:17px}
-section.content{padding:65px 6%;max-width:1150px;margin:auto}
-.center{text-align:center}
-h2{font-size:clamp(30px,5vw,48px);letter-spacing:-1px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;margin-top:30px}
-.card{background:linear-gradient(145deg,#1d1d1d,#101010);padding:25px;border:1px solid #333;border-radius:17px;transition:.3s;position:relative;overflow:hidden}
-.card:before{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,#ff123812,transparent);transition:.7s}
-.card:hover{transform:translateY(-8px);border-color:var(--red);box-shadow:0 15px 40px #ff123814}
-.card:hover:before{left:130%}
-.number{font-size:28px;color:var(--red);font-weight:900}
-.card h3{font-size:18px}
-.card p{font-size:14px}
-.proofs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:30px}
-.proof{background:#151515;padding:10px;border:1px solid #333;border-radius:16px}
-.proof img{width:100%;height:auto;display:block;border-radius:10px}
-.caption{padding:12px 5px;font-size:13px;color:#ccc}
-.lesson{margin:12px 0;padding:19px;background:#151515;border:1px solid #333;border-radius:12px}
-.offer{margin:35px 6% 75px;padding:50px 20px;text-align:center;border:1px solid #ff123866;border-radius:22px;background:radial-gradient(ellipse at top,#40000d,#111);animation:borderGlow 4s infinite alternate}
-.offer p{max-width:650px;margin:20px auto}
-footer{text-align:center;padding:25px;border-top:1px solid #292929;color:#888;font-size:12px}
-.reveal{opacity:0;transform:translateY(25px);transition:opacity .7s,transform .7s}
-.reveal.show{opacity:1;transform:translateY(0)}
-@keyframes appear{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
-@keyframes titleGlow{from{text-shadow:0 0 5px #ff123822}to{text-shadow:0 0 35px #ff123866}}
-@keyframes borderGlow{from{box-shadow:0 0 8px #ff123811}to{box-shadow:0 0 35px #ff123833}}
-@media(max-width:700px){.grid,.proofs{grid-template-columns:1fr}.hero{padding:65px 6%}.quizbox{padding:23px}header{padding:17px 5%}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+:root{--bg:#08090d;--panel:#11131a;--panel2:#171a22;--white:#f7f8fb;--muted:#a8adbb;--green:#ff1738;--green2:#c90025;--line:rgba(255,255,255,.1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 15% 5%,rgba(255,23,56,.16),transparent 35%),radial-gradient(ellipse at 90% 35%,rgba(64,91,255,.10),transparent 32%),#08090d}.grain{position:fixed;inset:0;pointer-events:none;z-index:10;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 36px));margin:auto}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.04em}.brand-mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--green),#a90020);display:grid;place-items:center;color:#04150f;font-weight:1000;box-shadow:0 0 25px #ff173840}.nav-label{font-size:12px;color:var(--muted);letter-spacing:.13em;text-transform:uppercase}.hero{min-height:650px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:50px;padding:72px 0 84px}.eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid #ff173855;background:#ff173812;border-radius:999px;padding:9px 13px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ff9aa8}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:pulse 1.7s infinite}h1{font-size:clamp(43px,6.2vw,76px);line-height:.99;letter-spacing:-.065em;margin:24px 0 22px;font-weight:950}h1 span{color:var(--green);text-shadow:0 0 34px #ff173825}.hero p{color:#b7bbc6;font-size:17px;line-height:1.75;max-width:570px;margin:0 0 28px}.actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 22px;border-radius:14px;font-weight:900;border:1px solid transparent;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer}.btn:hover{transform:translateY(-3px)}.btn-main{background:linear-gradient(135deg,#ff4b5f,#e60026);color:#ffffff;box-shadow:0 12px 36px #ff17382b}.btn-main:hover{box-shadow:0 15px 45px #ff173855}.btn-secondary{border-color:var(--line);background:#ffffff08;color:white}.small-note{font-size:12px;color:#8d93a2;margin-top:15px}.visual{position:relative;min-height:470px;display:grid;place-items:center}.orb{position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,#ff173825,transparent 68%);filter:blur(8px);animation:float 7s ease-in-out infinite}.course-card{position:relative;width:min(100%,390px);padding:30px;border-radius:28px;border:1px solid #ffffff1c;background:linear-gradient(145deg,#1b2028eF,#0c0e13f5);box-shadow:0 35px 90px #0008, inset 0 1px #ffffff16;transform:rotate(2deg);animation:float 6s ease-in-out infinite}.course-card:before{content:"";position:absolute;inset:-1px;border-radius:28px;padding:1px;background:linear-gradient(135deg,#ff173870,transparent 50%,#6577ff55);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}.card-top{display:flex;justify-content:space-between;align-items:center;color:#aab2bf;font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:800}.mini-logo{width:40px;height:40px;display:grid;place-items:center;background:#ff173818;border:1px solid #ff173855;border-radius:13px;color:var(--green);font-size:20px}.card-title{font-size:39px;line-height:1;letter-spacing:-.06em;font-weight:950;margin:35px 0 12px}.card-title span{color:var(--green)}.card-desc{font-size:13px;color:#aeb4c1;line-height:1.6}.progress-label{display:flex;justify-content:space-between;font-size:11px;color:#c2c7d2;margin:28px 0 9px}.progress{height:8px;background:#ffffff13;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;width:18%;border-radius:20px;background:linear-gradient(90deg,#ff1738,#ff9aa8);animation:grow 2s ease-out both}.floating-tag{position:absolute;padding:13px 16px;border-radius:15px;background:#171b23;border:1px solid #ffffff1a;box-shadow:0 15px 35px #0005;font-size:12px;font-weight:800;animation:float 5s ease-in-out infinite}.tag-one{top:55px;right:-5px}.tag-two{bottom:54px;left:-15px}.tag-green{color:var(--green)}.section{padding:82px 0}.section-head{text-align:center;max-width:720px;margin:0 auto 42px}.kicker{color:var(--green);font-size:12px;letter-spacing:.17em;text-transform:uppercase;font-weight:900}.section h2{font-size:clamp(30px,4.4vw,49px);line-height:1.08;letter-spacing:-.05em;margin:13px 0}.section-head p{color:var(--muted);line-height:1.7}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature{background:linear-gradient(150deg,#171a22,#101218);border:1px solid var(--line);border-radius:20px;padding:25px;transition:transform .25s,border-color .25s}.feature:hover{transform:translateY(-6px);border-color:#ff173865}.feature-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#ff173815;color:var(--green);font-size:20px}.feature h3{font-size:18px;margin:19px 0 8px}.feature p{font-size:14px;line-height:1.7;color:var(--muted);margin:0}.testimonials{background:linear-gradient(180deg,transparent,#10131a 20%,#10131a 80%,transparent)}.proof-note{max-width:760px;margin:0 auto 28px;text-align:center;color:var(--muted);font-size:13px;line-height:1.6}.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}.proof{padding:12px;border:1px solid #ffffff18;border-radius:22px;background:#ffffff06;overflow:hidden;transition:transform .25s,border-color .25s}.proof:hover{transform:translateY(-5px);border-color:#ff173855}.proof img{width:100%;height:auto;display:block;border-radius:13px}.proof-caption{padding:13px 6px 5px;color:#d6d9e1;font-size:13px;line-height:1.5}.proof-caption strong{display:block;color:#fff;margin-bottom:4px}.learn{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px;align-items:start}.learn-copy{position:sticky;top:30px}.learn-copy p{color:var(--muted);line-height:1.8}.lesson-list{display:grid;gap:12px}.lesson{display:flex;gap:15px;align-items:flex-start;padding:19px;border:1px solid var(--line);background:#ffffff05;border-radius:16px}.num{flex:0 0 34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#ff173818;color:var(--green);font-weight:900}.lesson h3{margin:2px 0 5px;font-size:15px}.lesson p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}.offer{padding:0 0 90px}.offer-box{position:relative;overflow:hidden;text-align:center;padding:55px 25px;border:1px solid #ff173850;border-radius:28px;background:radial-gradient(ellipse at 50% 0%,#ff17381b,transparent 60%),linear-gradient(145deg,#141921,#0c0e13)}.offer-box h2{max-width:700px;margin:15px auto;font-size:clamp(32px,5vw,54px)}.offer-box p{color:var(--muted);max-width:610px;margin:0 auto 25px;line-height:1.7}.offer-box .btn{font-size:16px;padding:18px 28px}.disclaimer{max-width:720px;margin:20px auto 0;color:#858b99;font-size:11px;line-height:1.7}footer{border-top:1px solid var(--line);padding:25px 0;color:#828896;font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}@keyframes pulse{50%{opacity:.45;box-shadow:0 0 3px var(--green)}}@keyframes float{0%,100%{transform:translateY(0) rotate(2deg)}50%{transform:translateY(-12px) rotate(1deg)}}@keyframes grow{from{width:0}to{width:18%}}
+@media(max-width:800px){.hero{grid-template-columns:1fr;gap:12px;padding:55px 0 55px}.hero-copy{text-align:center}.hero p{margin-left:auto;margin-right:auto}.actions{justify-content:center}.visual{min-height:410px}.course-card{max-width:350px}.tag-one{right:0}.tag-two{left:0}.grid3{grid-template-columns:1fr}.feature{padding:22px}.proof-grid{grid-template-columns:1fr}.learn{grid-template-columns:1fr;gap:22px}.learn-copy{position:static}.section{padding:62px 0}.nav-label{display:none}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* Entrada: carregamento e perguntas */
+body.gated{overflow:hidden}body.gated main,body.gated footer,body.gated header{visibility:hidden}
+.entry-gate{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:22px;background:radial-gradient(ellipse at 50% 15%,#ff17382b,transparent 45%),#050507;transition:opacity .5s ease,visibility .5s ease}
+.entry-gate.gone{opacity:0;visibility:hidden;pointer-events:none}.gate-card{width:min(560px,100%);padding:clamp(24px,5vw,42px);border:1px solid #ff173866;border-radius:26px;background:linear-gradient(145deg,#171216,#09090c);box-shadow:0 25px 90px #ff00201b,0 0 0 1px #ffffff06 inset;animation:gateIn .55s ease both}.gate-brand{font-size:11px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:#ff465e}.gate-brand:before{content:' ';display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff1738;box-shadow:0 0 12px #ff1738;margin-right:9px}.gate-title{font-size:clamp(28px,6vw,42px);line-height:1.04;letter-spacing:-.05em;margin:19px 0 12px;font-weight:950}.gate-title span{color:#ff1738}.gate-sub{color:#b7b0b5;line-height:1.65;font-size:14px;margin:0 0 24px}.loading-area{padding:20px 0 4px}.loading-top{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#e7dfe2;margin-bottom:10px}.loading-track{height:10px;background:#ffffff14;border-radius:30px;overflow:hidden;border:1px solid #ffffff0b}.loading-fill{height:100%;width:0;background:linear-gradient(90deg,#ff1738,#ff6b48);border-radius:30px;box-shadow:0 0 20px #ff173866;transition:width .12s linear}.gate-spinner{display:inline-block;width:14px;height:14px;border:2px solid #ffffff35;border-top-color:#ff1738;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-3px;margin-right:8px}.gate-question{display:none}.gate-question.active{display:block;animation:gateIn .35s ease both}.gate-question h2{font-size:clamp(23px,5vw,32px);line-height:1.15;letter-spacing:-.04em;margin:8px 0 9px}.gate-question p{color:#b7b0b5;font-size:14px;line-height:1.6;margin:0 0 21px}.gate-options{display:grid;gap:10px}.gate-option{display:flex;align-items:center;gap:12px;width:100%;padding:15px 16px;text-align:left;border:1px solid #ffffff1b;border-radius:14px;background:#ffffff06;color:#f7f4f5;font:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s}.gate-option:hover,.gate-option.selected{border-color:#ff1738;background:#ff173814;transform:translateY(-1px)}.option-dot{width:17px;height:17px;border:1px solid #7d7378;border-radius:50%;flex:0 0 17px}.gate-option.selected .option-dot{border:5px solid #ff1738}.gate-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:23px}.gate-step{font-size:11px;color:#8e858a}.gate-next{border:0;border-radius:12px;padding:14px 20px;background:linear-gradient(135deg,#ff304c,#d90028);color:#fff;font-weight:900;cursor:pointer;box-shadow:0 8px 25px #ff17382b;transition:transform .2s,opacity .2s}.gate-next:hover{transform:translateY(-2px)}.gate-next:disabled{opacity:.4;cursor:not-allowed;transform:none}.gate-success{text-align:center;display:none}.gate-success.active{display:block;animation:gateIn .4s ease both}.success-icon{width:58px;height:58px;border-radius:18px;background:#ff17381a;border:1px solid #ff173866;color:#ff435c;font-size:27px;display:grid;place-items:center;margin:0 auto 18px}.gate-enter{width:100%;margin-top:8px}.gate-disclaimer{font-size:10px;line-height:1.5;color:#71686d;margin-top:18px;text-align:center}
+@keyframes gateIn{from{opacity:0;transform:translateY(12px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.gate-card,.gate-question.active,.gate-success.active{animation:none}}
+
+
+/* ANIMAÇÕES VISÍVEIS — identidade preto e vermelho */
+body:before{background:radial-gradient(ellipse at 15% 5%,rgba(255,23,56,.20),transparent 35%),radial-gradient(ellipse at 90% 35%,rgba(255,23,56,.11),transparent 32%),#08090d;animation:bgPulse 8s ease-in-out infinite alternate}
+body:after{content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none;background:repeating-linear-gradient(125deg,transparent 0 90px,rgba(255,23,56,.025) 91px 92px,transparent 93px 180px);animation:lightSweep 18s linear infinite}
+.hero-copy{animation:heroEnter .85s cubic-bezier(.2,.8,.2,1) both}
+.eyebrow{animation:badgePulse 3s ease-in-out infinite}
+.dot{background:#ff1738;box-shadow:0 0 12px #ff1738}
+.hero h1 span{animation:textGlow 2.8s ease-in-out infinite alternate}
+.btn-main{color:#fff;position:relative;overflow:hidden;animation:buttonPulse 2.8s ease-in-out infinite}
+.btn-main:after{content:"";position:absolute;top:-60%;left:-70%;width:45%;height:220%;background:linear-gradient(90deg,transparent,#ffffff66,transparent);transform:rotate(20deg);animation:buttonShine 4s ease-in-out infinite}
+.btn-secondary:hover{border-color:#ff1738;box-shadow:0 0 22px #ff173822}
+.orb{animation:orbBreath 5s ease-in-out infinite,orbSpin 22s linear infinite}
+.course-card{animation:cardFloat 5s ease-in-out infinite;transform-origin:center}
+.floating-tag{animation:tagFloat 4s ease-in-out infinite}
+.tag-two{animation-delay:-1.7s}
+.feature,.proof,.lesson{transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.feature:hover,.proof:hover,.lesson:hover{box-shadow:0 15px 40px #ff17381b;border-color:#ff173877}
+.reveal{opacity:0;transform:translateY(34px) scale(.985);transition:opacity .75s cubic-bezier(.2,.8,.2,1),transform .75s cubic-bezier(.2,.8,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0) scale(1)}
+.entry-gate{background:radial-gradient(ellipse at 50% 15%,#ff17383b,transparent 45%),#050507;background-size:150% 150%;animation:gateBg 7s ease-in-out infinite alternate}
+.gate-card{animation:gateCardIn .8s cubic-bezier(.2,.8,.2,1) both;box-shadow:0 25px 90px #ff00202a,0 0 60px #ff173815}
+.gate-brand{animation:badgePulse 2.5s ease-in-out infinite}
+.loading-fill{background:linear-gradient(90deg,#b00020,#ff1738,#ff7a88);background-size:200% 100%;animation:loadingShine 1s linear infinite}
+.gate-option{position:relative;overflow:hidden}
+.gate-option:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent,#ff17380d,transparent);transform:translateX(-110%);transition:transform .45s}
+.gate-option:hover:after{transform:translateX(110%)}
+.gate-next:not(:disabled){animation:buttonPulse 2s ease-in-out infinite}
+.offer-box{overflow:hidden;position:relative}
+.offer-box:before{content:"";position:absolute;inset:-100% auto -100% -40%;width:25%;background:linear-gradient(90deg,transparent,#ff17380c,transparent);transform:rotate(20deg);animation:offerSweep 6s linear infinite;pointer-events:none}
+@keyframes bgPulse{from{filter:saturate(.8)}to{filter:saturate(1.35)}}
+@keyframes lightSweep{from{transform:translateX(-4%) translateY(-2%)}to{transform:translateX(4%) translateY(2%)}}
+@keyframes heroEnter{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes textGlow{from{text-shadow:0 0 10px #ff173822}to{text-shadow:0 0 32px #ff173877,0 0 60px #ff173833}}
+@keyframes buttonPulse{0%,100%{box-shadow:0 10px 30px #ff173822}50%{box-shadow:0 12px 42px #ff173866}}
+@keyframes buttonShine{0%,60%{left:-70%}85%,100%{left:140%}}
+@keyframes orbBreath{0%,100%{opacity:.55;scale:.94}50%{opacity:1;scale:1.08}}
+@keyframes orbSpin{to{rotate:360deg}}
+@keyframes cardFloat{0%,100%{translate:0 0;rotate:1deg}50%{translate:0 -15px;rotate:-1deg}}
+@keyframes tagFloat{0%,100%{translate:0 0}50%{translate:0 -9px}}
+@keyframes gateBg{from{background-position:20% 0}to{background-position:80% 100%}}
+@keyframes gateCardIn{from{opacity:0;transform:translateY(22px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes loadingShine{to{background-position:200% 0}}
+@keyframes offerSweep{0%{left:-40%}100%{left:140%}}
+@media(prefers-reduced-motion:reduce){body:before,body:after,.hero-copy,.eyebrow,.hero h1 span,.btn-main,.btn-main:after,.orb,.course-card,.floating-tag,.entry-gate,.gate-card,.gate-brand,.loading-fill,.gate-next:not(:disabled),.offer-box:before{animation:none!important}.reveal{opacity:1;transform:none}}
+
+
+/* Animações de entrada, flutuação e brilho com fallback para hospedagem estática */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s ease, transform .75s cubic-bezier(.2,.75,.25,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.hero h1 { animation: titleRise .9s both; }
+.visual, .course-card { animation: floatCard 5s ease-in-out infinite; }
+.btn, .gate-option, .feature, .proof-card { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.btn:hover, .gate-option:hover, .feature:hover, .proof-card:hover { transform: translateY(-4px); }
+@keyframes titleRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes floatCard { 0%,100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
 </style>
+<base href="./">
 </head>
-<body>
-
-<div id="loading">
- <div class="loader">
-  <div class="brand">DO 0 AOS <span>10K</span></div>
-  <div class="loadtext">Preparando sua experiência...</div>
-  <div class="track"><div id="bar"></div></div>
-  <div id="percent">0%</div>
+<body class="gated">
+<div class="entry-gate" id="entryGate" role="dialog" aria-modal="true" aria-label="Boas-vindas e perguntas iniciais">
+ <div class="gate-card">
+  <div class="gate-brand">Do 0 aos 10K</div>
+  <div id="gateLoading" class="loading-area">
+   <div class="gate-title">Preparando sua <span>experiência...</span></div>
+   <p class="gate-sub"><span class="gate-spinner"></span> Pensando na melhor forma de te apresentar o treinamento.</p>
+   <div class="loading-top"><span id="loadingLabel">Carregando conteúdo</span><strong id="loadingPercent">0%</strong></div>
+   <div class="loading-track"><div class="loading-fill" id="loadingFill"></div></div>
+  </div>
+  <div id="gateQuiz" style="display:none">
+   <div class="loading-top"><span>PERSONALIZE SUA JORNADA</span><strong id="quizPercent">1 de 3</strong></div>
+   <div class="loading-track" style="margin-bottom:25px"><div class="loading-fill" id="quizFill" style="width:33%"></div></div>
+   <div class="gate-question active" data-q="0"><h2>Você já trabalhou com a internet?</h2><p>Queremos entender em que etapa você está hoje.</p><div class="gate-options"><button class="gate-option" data-answer="Nunca trabalhei pela internet"><span class="option-dot"></span>Nunca trabalhei pela internet</button><button class="gate-option" data-answer="Já tentei, mas ainda não tive resultados"><span class="option-dot"></span>Já tentei, mas ainda não tive resultados</button><button class="gate-option" data-answer="Já fiz algumas vendas online"><span class="option-dot"></span>Já fiz algumas vendas online</button></div></div>
+   <div class="gate-question" data-q="1"><h2>Qual é seu maior objetivo?</h2><p>Escolha a opção que mais combina com você.</p><div class="gate-options"><button class="gate-option" data-answer="Conseguir minha primeira venda"><span class="option-dot"></span>Conseguir minha primeira venda</button><button class="gate-option" data-answer="Aprender a vender produtos digitais"><span class="option-dot"></span>Aprender a vender produtos digitais</button><button class="gate-option" data-answer="Construir uma renda extra"><span class="option-dot"></span>Construir uma renda extra</button></div></div>
+   <div class="gate-question" data-q="2"><h2>Como você pretende divulgar?</h2><p>Vamos mostrar como o curso aborda os caminhos de divulgação.</p><div class="gate-options"><button class="gate-option" data-answer="Com conteúdo orgânico, sem anúncios pagos"><span class="option-dot"></span>Com conteúdo orgânico, sem anúncios pagos</button><button class="gate-option" data-answer="Quero aprender as opções primeiro"><span class="option-dot"></span>Quero aprender as opções primeiro</button><button class="gate-option" data-answer="Já divulgo nas redes sociais"><span class="option-dot"></span>Já divulgo nas redes sociais</button></div></div>
+   <div class="gate-footer"><span class="gate-step" id="gateStep">PERGUNTA 1 DE 3</span><button class="gate-next" id="gateNext" disabled>Continuar →</button></div>
+  </div>
+  <div class="gate-success" id="gateSuccess"><div class="success-icon">✓</div><div class="gate-brand">Tudo pronto</div><div class="gate-title">Sua jornada começa <span>agora.</span></div><p class="gate-sub">Veja como funciona o treinamento, conheça o conteúdo e confira os relatos compartilhados na página.</p><button class="gate-next gate-enter" id="gateEnter">ENTRAR NO SITE →</button></div>
+  <div class="gate-disclaimer">Conteúdo educacional. Resultados financeiros não são garantidos e variam de pessoa para pessoa.</div>
  </div>
 </div>
-
-<div id="quiz" class="hidden">
- <div class="quizbox">
-  <div class="kicker">Sua jornada começa aqui</div>
-  <h1>Vamos conhecer<br><span>seu objetivo.</span></h1>
-  <p>Responda três perguntas rápidas para continuar.</p>
-  <div id="question"></div>
-  <div id="answers" class="answers"></div>
-  <button id="next" class="primary hidden">CONTINUAR →</button>
- </div>
-</div>
-
-<div id="site" class="hidden">
-<header>
- <strong>DO 0 AOS <span>10K</span></strong>
- <a href="#conteudo">Conhecer o curso ↓</a>
+<div class="grain"></div>
+<header class="wrap nav">
+  <a class="brand" href="#"><span>DO 0 AOS <span style="color:var(--green)">10K</span></span></a>
+  <span class="nav-label">Treinamento digital</span>
+  <a class="btn btn-secondary" href="#conteudo" style="padding:10px 14px;font-size:12px">Conhecer o curso ↗</a>
 </header>
-
-<section class="hero">
- <div class="kicker">Treinamento online</div>
- <h1>Do 0 aos <span>10K</span><br>em Menos de 10 Dias</h1>
- <p>Aprenda a estruturar seu produto digital, conhecer a Kiwify e a Cakto e divulgar sua oferta usando estratégias de conteúdo orgânico.</p>
- <a class="primary" href="https://pay.kiwify.com.br/3qqikpO" target="_blank" rel="noopener">QUERO COMEÇAR AGORA →</a>
- <div class="small">Aulas gravadas · Estratégias práticas · Para iniciantes</div>
+<main>
+<section class="wrap hero">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="dot"></span> Comece sua jornada digital</div>
+    <h1>Do 0 aos <span>10K</span><br>em Menos de<br>10 Dias</h1>
+    <p>Aprenda os fundamentos para vender produtos digitais pela internet, montar sua estrutura na Kiwify ou Cakto e divulgar seu produto com conteúdo orgânico — mesmo começando do zero.</p>
+    <div class="actions">
+      <a class="btn btn-main" href="https://pay.kiwify.com.br/3qqikpO" target="_blank" rel="noopener">QUERO COMEÇAR AGORA <span>→</span></a>
+      <a class="btn btn-secondary" href="#depoimentos">Ver relatos de alunos ↓</a>
+    </div>
+    <div class="small-note">Aulas gravadas • Estratégias orgânicas • Acesso após confirmação da compra</div>
+  </div>
+  <div class="visual" aria-label="Cartão ilustrativo do curso">
+    <div class="orb"></div>
+    <div class="floating-tag tag-one"><span class="tag-green">●</span> Aprenda no seu ritmo</div>
+    <div class="course-card">
+      <div class="card-top"><span>Treinamento online</span><span class="mini-logo">↗</span></div>
+      <div class="card-title">DO 0<br>AOS <span>10K</span></div>
+      <div class="card-desc">Seu próximo passo no mercado digital começa com conhecimento e ação.</div>
+      <div class="progress-label"><span>Jornada de aprendizado</span><span>01 / 10</span></div>
+      <div class="progress"><i></i></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:24px"><span class="eyebrow" style="font-size:9px;padding:7px 9px">Kiwify</span><span class="eyebrow" style="font-size:9px;padding:7px 9px">Cakto</span><span class="eyebrow" style="font-size:9px;padding:7px 9px">Orgânico</span></div>
+    </div>
+    <div class="floating-tag tag-two">Conhecimento + <span class="tag-green">ação</span></div>
+  </div>
 </section>
 
-<section class="content" id="conteudo">
- <div class="center reveal">
-  <div class="kicker">O que você vai aprender</div>
-  <h2>Prepare-se para começar</h2>
-  <p>Aprenda os fundamentos e transforme conhecimento em ações práticas.</p>
- </div>
- <div class="grid">
-  <article class="card reveal"><div class="number">01</div><h3>Escolha seu nicho</h3><p>Entenda seu público e encontre uma ideia de produto digital.</p></article>
-  <article class="card reveal"><div class="number">02</div><h3>Monte sua oferta</h3><p>Aprenda sobre preço, apresentação do produto e checkout.</p></article>
-  <article class="card reveal"><div class="number">03</div><h3>Divulgue seu produto</h3><p>Conheça estratégias de conteúdo orgânico para apresentar sua oferta.</p></article>
+<section class="section" id="conteudo">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="kicker">O que você vai aprender</div><h2>Um caminho prático para começar</h2><p>Aprenda os passos essenciais para estruturar uma oferta digital e apresentar seu produto às pessoas certas.</p></div>
+  <div class="grid3">
+   <article class="feature reveal"><div class="feature-icon">01</div><h3>Escolha seu caminho</h3><p>Entenda os nichos, identifique um público e desenvolva uma ideia de produto digital que faça sentido.</p></article>
+   <article class="feature reveal"><div class="feature-icon">02</div><h3>Prepare sua estrutura</h3><p>Conheça Kiwify e Cakto, organize sua oferta, defina o preço e prepare a página de checkout.</p></article>
+   <article class="feature reveal"><div class="feature-icon">03</div><h3>Divulgue sem anúncios</h3><p>Aprenda princípios de conteúdo orgânico para comunicar sua oferta, atrair interesse e acompanhar resultados.</p></article>
+  </div>
  </div>
 </section>
 
-<section class="content" id="depoimentos">
- <div class="center reveal">
-  <div class="kicker">Mensagens compartilhadas</div>
-  <h2>Relatos de alunos</h2>
-  <p>Veja as capturas de tela compartilhadas para esta página.</p>
+<section class="section testimonials" id="depoimentos">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="kicker">Relatos compartilhados</div><h2>Veja as mensagens recebidas</h2><p>Experiências e capturas de tela compartilhadas para você conhecer os relatos de quem está acompanhando o treinamento.</p></div>
+  <p class="proof-note reveal">As imagens abaixo foram fornecidas pelo responsável pelo curso. Elas não representam resultados típicos nem garantem que outros alunos terão os mesmos ganhos.</p>
+  <div class="proof-grid">
+   <article class="proof reveal"><img src="./assets/depoimento1.png" alt="Captura de conversa com painel de vendas mostrando quatro vendas e receita de R$ 52,15"><div class="proof-caption"><strong>Relato durante o treinamento</strong>Mensagem compartilhada junto de uma captura de painel de vendas.</div></article>
+   <article class="proof reveal"><img src="./assets/depoimento2.png" alt="Captura de conversa com painel de receita e mensagem sobre primeira venda"><div class="proof-caption"><strong>Mensagem sobre a primeira venda</strong>Captura de tela compartilhada pelo responsável pelo curso.</div></article>
+  </div>
  </div>
- <div class="proofs">
-  <article class="proof reveal">
-   <img src="depoimento1.jpg" alt="Primeira captura de tela">
-   <div class="caption">Relato compartilhado durante o treinamento.</div>
-  </article>
-  <article class="proof reveal">
-   <img src="depoimento2.jpg" alt="Segunda captura de tela">
-   <div class="caption">Mensagem compartilhada sobre resultados de vendas.</div>
-  </article>
- </div>
- <p style="font-size:12px;text-align:center">Experiências individuais não garantem resultados semelhantes. Use imagens reais com autorização.</p>
 </section>
 
-<section class="content">
- <div class="center reveal">
-  <div class="kicker">Conteúdo do curso</div>
-  <h2>O que você vai estudar</h2>
+<section class="section">
+ <div class="wrap learn">
+  <div class="learn-copy reveal"><div class="kicker">Conteúdo do treinamento</div><h2>Aprenda o processo, passo a passo.</h2><p>O objetivo é ajudar você a entender as ferramentas e transformar o conhecimento em ações concretas. Os resultados dependem da sua execução, da oferta e de fatores de mercado.</p><a class="btn btn-main" href="https://pay.kiwify.com.br/3qqikpO" target="_blank" rel="noopener">QUERO ACESSAR O CURSO →</a></div>
+  <div class="lesson-list">
+   <article class="lesson reveal"><span class="num">01</span><div><h3>Como funciona o mercado digital</h3><p>Entenda os conceitos básicos e como produtos digitais são vendidos online.</p></div></article>
+   <article class="lesson reveal"><span class="num">02</span><div><h3>Escolha de nicho e público</h3><p>Aprenda a escolher um tema e entender as necessidades das pessoas.</p></div></article>
+   <article class="lesson reveal"><span class="num">03</span><div><h3>Ideia, oferta e preço</h3><p>Organize sua proposta e defina um preço coerente com o que entrega.</p></div></article>
+   <article class="lesson reveal"><span class="num">04</span><div><h3>Kiwify e Cakto</h3><p>Conheça as plataformas e os pontos essenciais para estruturar a venda.</p></div></article>
+   <article class="lesson reveal"><span class="num">05</span><div><h3>Conteúdo orgânico</h3><p>Planeje publicações e aprenda a comunicar seu produto sem anúncios pagos.</p></div></article>
+   <article class="lesson reveal"><span class="num">06</span><div><h3>Rotina e acompanhamento</h3><p>Crie um plano de ação, observe os dados e melhore sua comunicação com o tempo.</p></div></article>
+  </div>
  </div>
- <div class="lesson reveal"><b>Módulo 1 — Preparação</b><p>Mercado digital, nicho, público e introdução à Kiwify e Cakto.</p></div>
- <div class="lesson reveal"><b>Módulo 2 — Produto e vendas</b><p>Produto digital, preço, oferta, checkout e página de vendas.</p></div>
- <div class="lesson reveal"><b>Módulo 3 — Divulgação</b><p>Conteúdo orgânico, vídeos curtos, acompanhamento de dados e plano de ação.</p></div>
 </section>
 
-<section class="offer reveal">
- <div class="kicker">Comece sua jornada</div>
- <h2>Aprenda. Aplique. Evolua.</h2>
- <p>Entre no treinamento e aprenda os fundamentos para estruturar e divulgar seu produto digital.</p>
- <a class="primary" href="https://pay.kiwify.com.br/3qqikpO" target="_blank" rel="noopener">COMPRAR O CURSO →</a>
- <p style="font-size:11px">A meta de 10 mil reais em 10 dias não é uma promessa nem garantia de faturamento.</p>
+<section class="wrap offer" id="comprar">
+ <div class="offer-box reveal">
+  <div class="kicker">Dê o primeiro passo</div>
+  <h2>Seu próximo capítulo começa com uma decisão.</h2>
+  <p>Entre no treinamento, estude as aulas e aplique o que aprender para construir sua própria experiência no mercado digital.</p>
+  <a class="btn btn-main" href="https://pay.kiwify.com.br/3qqikpO" target="_blank" rel="noopener">QUERO COMPRAR O CURSO <span>→</span></a>
+  <div class="disclaimer">“10K em menos de 10 dias” é o nome e a meta proposta pelo treinamento, não uma promessa ou garantia de faturamento. Não há garantia de ganhos. Resultados variam conforme experiência, esforço, oferta, público e condições do mercado. Verifique preço, condições e informações do produto na página de checkout antes de concluir a compra.</div>
+ </div>
 </section>
-<footer>© <span id="year"></span> Do 0 aos 10K em Menos de 10 Dias</footer>
-</div>
-
+</main>
+<footer><div class="wrap footer-inner"><span>© <span id="year"></span> Do 0 aos 10K em Menos de 10 Dias</span><span>Conteúdo educacional sobre vendas digitais.</span></div></footer>
 <script>
-const loading=document.getElementById("loading");
-const bar=document.getElementById("bar");
-const percent=document.getElementById("percent");
-const quiz=document.getElementById("quiz");
-const site=document.getElementById("site");
-
-let progress=0;
-const timer=setInterval(()=>{
- progress=Math.min(100,progress+5);
- bar.style.width=progress+"%";
- percent.textContent=progress+"%";
- if(progress>=100){
-  clearInterval(timer);
-  setTimeout(()=>{
-   loading.classList.add("hidden");
-   quiz.classList.remove("hidden");
-   showQuestion();
-  },150);
- }
-},100);
-
-const questions=[
- {q:"Você já trabalhou com a internet?",a:["Nunca trabalhei","Já tentei algumas vezes","Já vendo pela internet"]},
- {q:"Qual é seu maior objetivo?",a:["Fazer minha primeira venda","Criar uma renda extra","Desenvolver meu negócio digital"]},
- {q:"Como pretende divulgar seu produto?",a:["Instagram ou TikTok","Grupos e comunidades","Ainda estou aprendendo"]}
-];
-let current=0;
-let selected=[];
-const question=document.getElementById("question");
-const answers=document.getElementById("answers");
-const next=document.getElementById("next");
-
-function showQuestion(){
- const item=questions[current];
- question.innerHTML='<div class="kicker">Pergunta '+(current+1)+' de '+questions.length+'</div><h3>'+item.q+'</h3>';
- answers.innerHTML="";
- next.classList.add("hidden");
- item.a.forEach(answer=>{
-  const button=document.createElement("button");
-  button.className="answer";
-  button.textContent=answer;
-  button.onclick=()=>{
-   selected[current]=answer;
-   answers.querySelectorAll("button").forEach(b=>b.classList.remove("selected"));
-   button.classList.add("selected");
-   next.classList.remove("hidden");
-   next.textContent=current===questions.length-1?"ENTRAR NO SITE →":"CONTINUAR →";
-  };
-  answers.appendChild(button);
- });
-}
-next.onclick=()=>{
- if(!selected[current])return;
- current++;
- if(current<questions.length){showQuestion();}
- else{
-  quiz.classList.add("hidden");
-  site.classList.remove("hidden");
-  window.scrollTo(0,0);
-  document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
- }
-};
-
-const observer=new IntersectionObserver(entries=>{
- entries.forEach(entry=>{
-  if(entry.isIntersecting){
-   entry.target.classList.add("show");
-   observer.unobserve(entry.target);
+(function(){
+  function startSite(){
+    const byId = id => document.getElementById(id);
+    const gate=byId('entryGate'), loading=byId('gateLoading'), quiz=byId('gateQuiz'), success=byId('gateSuccess');
+    const fill=byId('loadingFill'), pct=byId('loadingPercent'), label=byId('loadingLabel');
+    if(byId('year')) byId('year').textContent=new Date().getFullYear();
+    // Revela os blocos conforme entram na tela (funciona também hospedado).
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
+      revealItems.forEach(el => revealObserver.observe(el));
+    } else {
+      revealItems.forEach(el => el.classList.add('visible'));
+    }
+    // Fallback: garante conteúdo visível se algum script de animação falhar.
+    setTimeout(() => revealItems.forEach(el => el.classList.add('visible')), 4500);
+    // Progresso visível garantido; ao fim de 2 segundos, abre as perguntas.
+    const started=Date.now();
+    const tick=()=>{
+      const progress=Math.min(100,Math.round((Date.now()-started)/20));
+      if(fill) fill.style.width=progress+'%';
+      if(pct) pct.textContent=progress+'%';
+      if(progress>=100){
+        if(label) label.textContent='Concluído';
+        setTimeout(()=>{if(loading) loading.style.display='none'; if(quiz) quiz.style.display='block';},150);
+      } else { setTimeout(tick,40); }
+    };
+    tick();
+    let current=0; const answers=[null,null,null];
+    const questions=[...document.querySelectorAll('.gate-question')];
+    const next=byId('gateNext');
+    function update(){
+      questions.forEach((q,i)=>q.classList.toggle('active',i===current));
+      const qp=byId('quizPercent'), qf=byId('quizFill'), step=byId('gateStep');
+      if(qp) qp.textContent=(current+1)+' de 3';
+      if(qf) qf.style.width=((current+1)/3*100)+'%';
+      if(step) step.textContent='PERGUNTA '+(current+1)+' DE 3';
+      if(next){next.disabled=!answers[current];next.textContent=current===2?'Ver meu resultado →':'Continuar →';}
+    }
+    questions.forEach((q,qi)=>q.querySelectorAll('.gate-option').forEach(btn=>btn.addEventListener('click',()=>{
+      q.querySelectorAll('.gate-option').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected'); answers[qi]=btn.dataset.answer || btn.textContent.trim();
+      if(next){next.disabled=false;next.textContent=current===2?'Ver meu resultado →':'Continuar →';}
+    })));
+    if(next) next.addEventListener('click',()=>{
+      if(!answers[current]) return;
+      if(current<2){current++;update();}
+      else {if(quiz) quiz.style.display='none';if(success) success.classList.add('active');}
+    });
+    const enter=byId('gateEnter');
+    if(enter) enter.addEventListener('click',()=>{
+      if(gate) gate.classList.add('gone');document.body.classList.remove('gated');
+      setTimeout(()=>{if(gate) gate.remove();},550);window.scrollTo({top:0,behavior:'smooth'});
+    });
+    // Safety fallback: the loading screen can never remain stuck.
+    setTimeout(()=>{if(loading && loading.style.display!=='none'){loading.style.display='none';if(quiz)quiz.style.display='block';}},3000);
+    update();
   }
- });
-},{threshold:.1});
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
-document.getElementById("year").textContent=new Date().getFullYear();
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',startSite); else startSite();
+})();
 </script>
 </body>
 </html>
